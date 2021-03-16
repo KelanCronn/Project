@@ -1,0 +1,54 @@
+#include <Wire.h>
+#include "rgb_lcd.h"
+rgb_lcd lcd;
+
+int colorR ;
+int colorG ;
+int colorB ;
+// constants won't change. They're used here to set pin numbers:
+const int buttonPin = 2;     // the number of the pushbutton pin
+const int ledPin =  13;      // the number of the LED pin
+
+// variables will change:
+int buttonState = 0;         // variable for reading the pushbutton status
+
+void setup() {
+  // initialize the LED pin as an output:
+  pinMode(ledPin, OUTPUT);
+  // initialize the pushbutton pin as an input:
+  pinMode(buttonPin, INPUT);
+    lcd.begin(16,2);
+      lcd.print("IoT pretest");
+}
+
+void loop() {
+  // read the state of the pushbutton value:
+  buttonState = digitalRead(buttonPin);
+
+  // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
+  if (buttonState == HIGH)
+  {
+    // turn LED on:
+    digitalWrite(ledPin, HIGH);
+    int lightRead = digitalRead(ledPin);
+        if(lightRead==HIGH)
+         {
+             colorR = 0;
+              colorG = 255;
+             colorB = 0;
+               lcd.setRGB(colorR, colorG, colorB);
+    
+          }
+         
+  } 
+  else 
+  {
+    // turn LED off:
+    digitalWrite(ledPin, LOW);
+      colorR = 255;
+       colorG = 0;
+        colorB = 20;
+       lcd.setRGB(colorR, colorG, colorB);
+  }
+
+}
